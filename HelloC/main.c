@@ -1,7 +1,3 @@
-//usr/bin/make -s "${0%.*}" && ./"${0%.*}" "$@"; s=$?; rm ./"${0%.*}"; exit $s
-
-// use "bash ./main.c" to build and run the executable
-
 #include <stdio.h>
 #include <stdlib.h>
 
