@@ -1,3 +1,5 @@
+#include <cstdlib>
+
 #include <vtkActor.h>
 #include <vtkPolyDataMapper.h>
 #include <vtkProperty.h>
@@ -33,5 +35,5 @@ int main(int, char *[]) {
   interactor->SetRenderWindow(window);
   interactor->Start();
 
-  return 0;
+  return EXIT_SUCCESS;
 }

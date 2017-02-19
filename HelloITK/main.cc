@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <iostream>
 
 #include <itkImage.h>
@@ -10,5 +11,5 @@ int main(int, char *[]) {
 
   std::cout << image << std::endl;
 
-  return 0;
+  return EXIT_SUCCESS;
 }
