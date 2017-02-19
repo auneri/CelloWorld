@@ -3,7 +3,7 @@ if(POLICY CMP0054)
   cmake_policy(SET CMP0054 NEW)
 endif()
 
-project(HelloCpp LANGUAGES CXX)
+project(HelloCpp CXX)
 
 add_executable(${PROJECT_NAME}Executable
   main.cc)
