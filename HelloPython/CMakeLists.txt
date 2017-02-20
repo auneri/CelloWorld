@@ -22,7 +22,6 @@ find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
 set_source_files_properties(library.i PROPERTIES CPLUSPLUS ON)
-set_source_files_properties(library.i PROPERTIES SWIG_FLAGS "-c++;-fcompact;-fvirtual")
 swig_add_module(${PROJECT_NAME} python
   library.i)
 swig_link_libraries(${PROJECT_NAME}
@@ -31,11 +30,11 @@ swig_link_libraries(${PROJECT_NAME}
 target_include_directories(${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME} PRIVATE
   ${PROJECT_SOURCE_DIR}
   ${PYTHON_INCLUDE_PATH})
- add_custom_command(
-    TARGET ${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME} POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}> Python/$<TARGET_FILE_NAME:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}>
-    COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_NAME}.py Python/${PROJECT_NAME}.py
-    WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
+add_custom_command(
+  TARGET ${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME} POST_BUILD
+  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}> Python/$<TARGET_FILE_NAME:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}>
+  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_NAME}.py Python/${PROJECT_NAME}.py
+  WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
 
 find_package(PythonInterp)
