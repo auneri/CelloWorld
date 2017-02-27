@@ -14,8 +14,10 @@ add_custom_command(
   TARGET ${PROJECT_NAME}Library POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}Library> ${PROJECT_BINARY_DIR}/MATLAB/$<TARGET_FILE_NAME:${PROJECT_NAME}Library>)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang" OR CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(${PROJECT_NAME}Library PRIVATE -Weverything -Wfatal-errors)
+elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+  target_compile_options(${PROJECT_NAME}Library PRIVATE -Wall -Wextra -Wfatal-errors)
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(${PROJECT_NAME}Library PRIVATE /Wall)
 endif()
