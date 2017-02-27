@@ -1,14 +1,11 @@
 #include <cstdlib>
 
-// CudaTools
 #include <GpuDevice.h>
 
 
 int main(int, char *[]) {
 
-  ct::GpuDevice *device = ct::GpuDevice::GetInstance();
-  device->SetDevices();
-  device->PrintUsage();
+  ct::GpuDevice::PrintDevices();
 
   return EXIT_SUCCESS;
 }
