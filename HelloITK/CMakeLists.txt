@@ -21,3 +21,9 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
 elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(${PROJECT_NAME}Executable PRIVATE /W3)
 endif()
+
+include(CTest)
+enable_testing()
+add_test(
+  NAME ${PROJECT_NAME}Tests
+  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)

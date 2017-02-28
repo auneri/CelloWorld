@@ -19,7 +19,8 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(${PROJECT_NAME}Library PRIVATE /Wall)
 endif()
 
-find_package(PythonLibs REQUIRED)
+find_package(PythonInterp REQUIRED)
+find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
@@ -38,8 +39,6 @@ add_custom_command(
   COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_NAME}.py Python/${PROJECT_NAME}.py
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
-
-find_package(PythonInterp)
 if(PYTHON_EXECUTABLE)
   include(CTest)
   enable_testing()

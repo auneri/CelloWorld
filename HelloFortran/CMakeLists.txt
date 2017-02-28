@@ -11,3 +11,9 @@ add_executable(${PROJECT_NAME}Executable
 if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
   target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
 endif()
+
+include(CTest)
+enable_testing()
+add_test(
+  NAME ${PROJECT_NAME}Tests
+  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)

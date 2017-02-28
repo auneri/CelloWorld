@@ -27,7 +27,6 @@ configure_file(
   ${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Library.h
   @ONLY)
 
-
 find_program(MATLAB_EXECUTABLE matlab)
 if(MATLAB_EXECUTABLE)
   include(CTest)

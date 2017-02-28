@@ -9,3 +9,9 @@ add_executable(${PROJECT_NAME}Executable
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${CudaTools_LIBRARIES})
+
+include(CTest)
+enable_testing()
+add_test(
+  NAME ${PROJECT_NAME}Tests
+  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)
