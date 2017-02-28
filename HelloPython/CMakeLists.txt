@@ -20,6 +20,14 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
 endif()
 
 find_package(PythonInterp REQUIRED)
+execute_process(
+  COMMAND ${PYTHON_EXECUTABLE} -c "import sysconfig; print(sysconfig.get_config_var('INCLUDEPY'))"
+  OUTPUT_VARIABLE PYTHON_INCLUDE_DIR
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
+execute_process(
+  COMMAND ${PYTHON_EXECUTABLE} -c "import os; import sysconfig; print(os.path.join(sysconfig.get_config_var('LIBDIR'), sysconfig.get_config_var('LDLIBRARY')))"
+  OUTPUT_VARIABLE PYTHON_LIBRARY
+  OUTPUT_STRIP_TRAILING_WHITESPACE)
 find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
