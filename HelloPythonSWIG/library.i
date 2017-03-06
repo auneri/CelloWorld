@@ -1,4 +1,4 @@
-%module HelloPython
+%module HelloPythonSWIG
 
 %{
   #include <library.h>

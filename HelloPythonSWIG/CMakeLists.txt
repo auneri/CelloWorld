@@ -6,7 +6,7 @@ if(POLICY CMP0054)
   cmake_policy(SET CMP0054 NEW)
 endif()
 
-project(HelloPython)
+project(HelloPythonSWIG)
 
 add_library(${PROJECT_NAME}Library
   library.cc)
