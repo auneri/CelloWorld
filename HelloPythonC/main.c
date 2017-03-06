@@ -1,7 +1,7 @@
+#include <Python.h>  // include before standard headers
+
 #include <stdio.h>
 #include <stdlib.h>
-
-#include <Python.h>
 
 
 static int ARGC = 0;
@@ -13,37 +13,47 @@ static PyObject* HelloPythonC_argc(PyObject *self, PyObject *args) {
 }
 
 
-static PyMethodDef EmbMethods[] = {
+static PyMethodDef HelloPythonCMethods[] = {
   {"argc", HelloPythonC_argc, METH_VARARGS, "Return the number of arguments received by the process."},
   {NULL, NULL, 0, NULL}
 };
 
 
-static PyModuleDef EmbModule = {
-  PyModuleDef_HEAD_INIT, "HelloPythonC", NULL, -1, EmbMethods, NULL, NULL, NULL, NULL
+#if PY_MAJOR_VERSION >= 3
+static PyModuleDef HelloPythonCModule = {
+  PyModuleDef_HEAD_INIT, "HelloPythonC", NULL, -1, HelloPythonCMethods, NULL, NULL, NULL, NULL
 };
+#endif
 
 
+#if PY_MAJOR_VERSION >= 3
 static PyObject* PyInit_HelloPythonC(void) {
-  return PyModule_Create(&EmbModule);
+  return PyModule_Create(&HelloPythonCModule);
 }
+#else
+static void PyInit_HelloPythonC(void) {
+  Py_InitModule3("HelloPythonC", HelloPythonCMethods, NULL);
+}
+#endif
 
 
 int main(int argc, char *argv[]) {
-  PyObject *pName, *pModule, *pDict, *pFunc;
-  PyObject *pArgs, *pValue;
+  PyObject *pName, *pModule, *pFunc, *pArgs, *pValue;
   int i;
 
   if (argc < 3) {
     fprintf(stderr, "Usage: HelloPythonC module_name function_name [args]\n");
     return EXIT_FAILURE;
   }
-
   ARGC = argc;
-  PyImport_AppendInittab("HelloPythonC", &PyInit_HelloPythonC);
 
+  PyImport_AppendInittab("HelloPythonC", &PyInit_HelloPythonC);
   Py_Initialize();
+#if PY_MAJOR_VERSION >= 3
   pName = PyUnicode_DecodeFSDefault(argv[1]);  // error checking of pName left out
+#else
+  pName = Py_BuildValue("s", argv[1]);  // error checking of pName left out
+#endif
 
   pModule = PyImport_Import(pName);
   Py_DECREF(pName);

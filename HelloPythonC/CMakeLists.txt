@@ -1,10 +1,12 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-project(HelloPythonC)
+project(HelloPythonC C)
 
 find_package(PythonInterp REQUIRED)
-get_filename_component(PYTHON_BIN_DIR "${PYTHON_EXECUTABLE}" DIRECTORY)
-get_filename_component(PYTHONHOME "${PYTHON_BIN_DIR}" DIRECTORY)
+get_filename_component(PYTHONHOME "${PYTHON_EXECUTABLE}" DIRECTORY)
+if(UNIX)
+  get_filename_component(PYTHONHOME "${PYTHONHOME}" DIRECTORY)
+endif()
 
 find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
