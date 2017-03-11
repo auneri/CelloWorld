@@ -9,8 +9,8 @@ find_package(Qt4 REQUIRED)
 include(${QT_USE_FILE})
 
 set(${PROJECT_NAME}Executable_SRCS
-  main.cc
-  window.cc)
+  main.cxx
+  window.cxx)
 
 set(${PROJECT_NAME}Executable_HDRS
   window.h)

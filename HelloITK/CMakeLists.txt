@@ -9,7 +9,7 @@ find_package(ITK REQUIRED)
 include(${ITK_USE_FILE})
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${ITK_LIBRARIES})

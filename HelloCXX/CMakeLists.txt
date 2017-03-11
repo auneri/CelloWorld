@@ -6,7 +6,7 @@ endif()
 project(HelloCpp CXX)
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(${PROJECT_NAME}Executable PRIVATE -Weverything -Wfatal-errors)

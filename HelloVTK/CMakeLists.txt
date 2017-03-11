@@ -9,7 +9,7 @@ find_package(VTK REQUIRED)
 include(${VTK_USE_FILE})
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${VTK_LIBRARIES})

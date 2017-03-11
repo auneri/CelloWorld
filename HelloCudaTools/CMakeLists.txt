@@ -5,7 +5,7 @@ project(HelloCudaTools)
 find_package(CudaTools REQUIRED)
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${CudaTools_LIBRARIES})

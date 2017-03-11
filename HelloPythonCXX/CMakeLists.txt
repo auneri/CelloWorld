@@ -12,7 +12,7 @@ find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${PYTHON_LIBRARIES})

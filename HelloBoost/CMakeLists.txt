@@ -13,7 +13,7 @@ set(Boost_USE_STATIC_LIBS ON)
 find_package(Boost COMPONENTS program_options REQUIRED)
 
 add_executable(${PROJECT_NAME}Executable
-  main.cc)
+  main.cxx)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${Boost_LIBRARIES})

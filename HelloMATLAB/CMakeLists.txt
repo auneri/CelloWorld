@@ -9,7 +9,7 @@ endif()
 project(HelloMATLAB)
 
 add_library(${PROJECT_NAME}Library SHARED
-  library.cc)
+  library.cxx)
 add_custom_command(
   TARGET ${PROJECT_NAME}Library POST_BUILD
   COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${PROJECT_NAME}Library> ${PROJECT_BINARY_DIR}/MATLAB/$<TARGET_FILE_NAME:${PROJECT_NAME}Library>)

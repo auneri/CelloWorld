@@ -9,7 +9,7 @@ endif()
 project(HelloPythonSWIG)
 
 add_library(${PROJECT_NAME}Library
-  library.cc)
+  library.cxx)
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(${PROJECT_NAME}Library PRIVATE -Weverything -Wfatal-errors)

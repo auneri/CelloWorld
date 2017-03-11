@@ -8,7 +8,7 @@ $(APP): $(OBJ)
 	@echo "Linking $(OBJ) to $(APP)"
 	$(CXX) $^ -o $@ $(CXXFLAGS)
 
-%.o: %.cc
+%.o: %.cxx
 	@echo "Compiling $< to $@"
 	$(CXX) -c $< $(CXXFLAGS)
 
