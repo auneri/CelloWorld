@@ -3,7 +3,7 @@ if(POLICY CMP0054)
   cmake_policy(SET CMP0054 NEW)
 endif()
 
-project(CTools)
+project(HelloWorld)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
