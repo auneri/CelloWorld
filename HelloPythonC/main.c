@@ -23,10 +23,8 @@ static PyMethodDef HelloPythonCMethods[] = {
 static PyModuleDef HelloPythonCModule = {
   PyModuleDef_HEAD_INIT, "HelloPythonC", NULL, -1, HelloPythonCMethods, NULL, NULL, NULL, NULL
 };
-#endif
 
 
-#if PY_MAJOR_VERSION >= 3
 static PyObject* PyInit_HelloPythonC(void) {
   return PyModule_Create(&HelloPythonCModule);
 }
