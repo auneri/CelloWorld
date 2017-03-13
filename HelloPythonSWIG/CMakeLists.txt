@@ -40,14 +40,13 @@ add_custom_command(
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
 if(PYTHON_EXECUTABLE)
-  include(CTest)
-  enable_testing()
-
   configure_file(
     tests.py
     ${PROJECT_BINARY_DIR}/Python/${PROJECT_NAME}Tests.py
     @ONLY)
 
+  include(CTest)
+  enable_testing()
   add_test(
     NAME ${PROJECT_NAME}Tests
     WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python

@@ -17,15 +17,20 @@ add_executable(${PROJECT_NAME}Executable
 target_link_libraries(${PROJECT_NAME}Executable
   ${PYTHON_LIBRARIES})
 
+configure_file(
+  tests.py
+  ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Tests.py
+  @ONLY)
+
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable> tests argc)
+  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable> ${PROJECT_NAME}Tests argc)
 set_property(
   TEST ${PROJECT_NAME}Tests
   PROPERTY ENVIRONMENT PYTHONHOME=${PYTHONHOME})
 set_property(
   TEST ${PROJECT_NAME}Tests
   APPEND
-  PROPERTY ENVIRONMENT PYTHONPATH=${PROJECT_SOURCE_DIR})
+  PROPERTY ENVIRONMENT PYTHONPATH=${PROJECT_BINARY_DIR})

@@ -29,14 +29,6 @@ configure_file(
 
 find_program(MATLAB_EXECUTABLE matlab)
 if(MATLAB_EXECUTABLE)
-  include(CTest)
-  enable_testing()
-
-  configure_file(
-    tests.m
-    ${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Tests.m
-    @ONLY)
-
   if(UNIX)
     set(MATLAB_EXE "${MATLAB_EXECUTABLE}" -nojvm -nodesktop -nosplash)
   elseif(WIN32)
@@ -49,6 +41,13 @@ if(MATLAB_EXECUTABLE)
     "try; run('${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Tests.m')"
     "catch err; fprintf(2, '%s\\n', getReport(err, 'extended')); exit(1)"
     "end; exit(0)")
+  configure_file(
+    tests.m
+    ${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Tests.m
+    @ONLY)
+
+  include(CTest)
+  enable_testing()
   add_test(
     NAME ${PROJECT_NAME}Tests
     COMMAND ${MATLAB_EXE} -r "${SCRIPT}")
