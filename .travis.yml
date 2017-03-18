@@ -13,7 +13,7 @@ addons:
       - libboost-all-dev
       - libinsighttoolkit4-dev
       - libopenmpi-dev
-      - libvtk6-dev
+      - libvtk5-dev
       - nvidia-cuda-toolkit
       - openmpi-bin
       - python-dev
