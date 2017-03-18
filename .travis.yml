@@ -12,10 +12,10 @@ addons:
       - gfortran
       - libboost-all-dev
       - libinsighttoolkit4-dev
-      - libopenmpi-dev
       - libvtk5-dev
+      - mpi-default-bin
+      - mpi-default-dev
       - nvidia-cuda-toolkit
-      - openmpi-bin
       - python-dev
       - qt4-dev-tools
       - swig
