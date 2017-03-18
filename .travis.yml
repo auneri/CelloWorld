@@ -8,9 +8,9 @@ sudo: required
 addons:
   apt:
     packages:
-      - boost
       - cmake
       - gfortran
+      - libboost-all-dev
       - libinsighttoolkit4-dev
       - libopenmpi-dev
       - libvtk6-dev
