@@ -8,10 +8,10 @@ sudo: false
 before_script:
   - mkdir build
   - cd build
-  - cmake \
-    -DBUILD_HelloC=ON \
-    -DBUILD_HelloCXX=ON \
-    -DBUILD_HelloFortran=ON \
+  - cmake
+    -DBUILD_HelloC=ON
+    -DBUILD_HelloCXX=ON
+    -DBUILD_HelloFortran=ON
     ..
 
 script:
