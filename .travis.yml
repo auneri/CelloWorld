@@ -16,7 +16,7 @@ addons:
       - libvtk6-dev
       - nvidia-cuda-dev
       - openmpi-bin
-      - python-dev
+      - python3-dev
       - qt4-dev-tools
       - swig
 
