@@ -13,8 +13,6 @@ addons:
       - libboost-all-dev
       - libinsighttoolkit4-dev
       - libvtk5-dev
-      - mpi-default-bin
-      - mpi-default-dev
       - nvidia-cuda-toolkit
       - python-dev
       - qt4-dev-tools
@@ -34,7 +32,6 @@ before_script:
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
     -DBUILD_HelloITK=ON
-    -DBUILD_HelloMPI=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
