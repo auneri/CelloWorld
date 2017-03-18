@@ -14,9 +14,9 @@ addons:
       - libinsighttoolkit4-dev
       - libopenmpi-dev
       - libvtk6-dev
-      - nvidia-cuda-dev
+      - nvidia-cuda-toolkit
       - openmpi-bin
-      - python3-dev
+      - python-dev
       - qt4-dev-tools
       - swig
 
