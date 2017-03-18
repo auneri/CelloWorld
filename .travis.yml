@@ -20,6 +20,10 @@ addons:
       - qt4-dev-tools
       - swig
 
+# https://github.com/travis-ci/travis-ci/issues/5326
+before_install:
+  - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
+
 before_script:
   - mkdir build
   - cd build
