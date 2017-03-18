@@ -1,12 +1,18 @@
 language: c
 
+compiler: gcc
+
 dist: trusty
 sudo: false
 
 before_script:
   - mkdir build
   - cd build
-  - cmake ..
+  - cmake \
+    -DBUILD_HelloC=ON \
+    -DBUILD_HelloCXX=ON \
+    -DBUILD_HelloFortran=ON \
+    ..
 
 script:
   - make
