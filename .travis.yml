@@ -3,15 +3,39 @@ language: c
 compiler: gcc
 
 dist: trusty
-sudo: false
+sudo: required
+
+addons:
+  apt:
+    packages:
+      - boost
+      - cmake
+      - gfortran
+      - libinsighttoolkit4-dev
+      - libopenmpi-dev
+      - libvtk6-dev
+      - nvidia-cuda-dev
+      - openmpi-bin
+      - python-dev
+      - qt4-dev-tools
+      - swig
 
 before_script:
   - mkdir build
   - cd build
   - cmake
+    -DBUILD_HelloBoost=ON
     -DBUILD_HelloC=ON
+    -DBUILD_HelloCUDA=ON
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
+    -DBUILD_HelloITK=ON
+    -DBUILD_HelloMPI=ON
+    -DBUILD_HelloPythonC=ON
+    -DBUILD_HelloPythonCXX=ON
+    -DBUILD_HelloPythonSWIG=ON
+    -DBUILD_HelloQt4=ON
+    -DBUILD_HelloVTK=ON
     ..
 
 script:
