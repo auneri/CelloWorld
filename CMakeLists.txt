@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 
-project(HelloWorld)
+project(CelloWorld)
 
 file(GLOB FOLDERS "${PROJECT_SOURCE_DIR}/Hello*")
 foreach(FOLDER ${FOLDERS})
