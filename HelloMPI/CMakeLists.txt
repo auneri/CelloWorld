@@ -6,12 +6,21 @@ endif()
 project(HelloMPI C)
 
 find_package(MPI REQUIRED)
+include_directories(${MPI_INCLUDE_PATH})
 
 add_executable(${PROJECT_NAME}Executable
   main.c)
 
 target_link_libraries(${PROJECT_NAME}Executable
   ${MPI_LIBRARIES})
+
+if(MPI_COMPILE_FLAGS)
+  set_target_properties(${PROJECT_NAME}Executable PROPERTIES COMPILE_FLAGS "${MPI_COMPILE_FLAGS}")
+endif()
+
+if(MPI_LINK_FLAGS)
+  set_target_properties(${PROJECT_NAME}Executable PROPERTIES LINK_FLAGS "${MPI_LINK_FLAGS}")
+endif()
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
   target_compile_options(${PROJECT_NAME}Executable PRIVATE -Weverything -Wfatal-errors)
@@ -25,4 +34,4 @@ include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND ${MPIEXEC} -n 4 $<TARGET_FILE:${PROJECT_NAME}Executable>)
+  COMMAND ${MPIEXEC} ${MPIEXEC_NUMPROC_FLAG} 4 ${MPIEXEC_PREFLAGS} $<TARGET_FILE:${PROJECT_NAME}Executable> ${MPIEXEC_POSTFLAGS})

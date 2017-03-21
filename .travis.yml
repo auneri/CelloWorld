@@ -12,8 +12,10 @@ addons:
       - gfortran
       - libboost-all-dev
       - libinsighttoolkit4-dev
+      - libopenmpi-dev
       - libvtk5-dev
       - nvidia-cuda-toolkit
+      - openmpi-bin
       - python-dev
       - qt4-dev-tools
       - swig
@@ -32,6 +34,7 @@ before_script:
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
     -DBUILD_HelloITK=ON
+    -DBUILD_HelloMPI=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
