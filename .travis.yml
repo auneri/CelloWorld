@@ -16,7 +16,7 @@ addons:
       - libvtk5-dev
       - openmpi-bin
       - python-dev
-      - qt4-dev-tools
+      - qt4-default
       - swig
 
 # https://github.com/travis-ci/travis-ci/issues/5326
