@@ -3,10 +3,6 @@ cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
 project(HelloPythonC C)
 
 find_package(PythonInterp REQUIRED)
-get_filename_component(PYTHONHOME "${PYTHON_EXECUTABLE}" DIRECTORY)
-if(UNIX)
-  get_filename_component(PYTHONHOME "${PYTHONHOME}" DIRECTORY)
-endif()
 
 find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
 include_directories(${PYTHON_INCLUDE_DIRS})
@@ -27,9 +23,6 @@ enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
   COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable> ${PROJECT_NAME}Tests argc)
-set_property(
-  TEST ${PROJECT_NAME}Tests
-  PROPERTY ENVIRONMENT PYTHONHOME=${PYTHONHOME})
 set_property(
   TEST ${PROJECT_NAME}Tests
   APPEND
