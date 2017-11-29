@@ -22,8 +22,11 @@ find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
 set_source_files_properties(library.i PROPERTIES CPLUSPLUS ON)
-swig_add_module(${PROJECT_NAME} python
-  library.i)
+if(CMAKE_VERSION VERSION_LESS 3.8)
+  swig_add_module(${PROJECT_NAME} python library.i)
+else()
+  swig_add_library(${PROJECT_NAME} LANGUAGE python SOURCES library.i)
+endif()
 swig_link_libraries(${PROJECT_NAME}
   ${PROJECT_NAME}Library
   ${PYTHON_LIBRARIES})
