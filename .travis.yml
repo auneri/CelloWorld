@@ -16,7 +16,7 @@ addons:
       - libvtk5-dev
       - openmpi-bin
       - python-dev
-      - qt4-default
+      - qt5-default
       - swig
 
 # https://github.com/travis-ci/travis-ci/issues/5326
@@ -39,7 +39,7 @@ before_script:
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
-    -DBUILD_HelloQt4=ON
+    -DBUILD_HelloQt=ON
     -DBUILD_HelloVTK=ON
     ..
 
