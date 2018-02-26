@@ -8,7 +8,7 @@ int main(int argc, char *argv[]) {
 
   printf("hello, world\n");
 
-#if __STDC_VERSION__ >= 201112L
+#if defined(__STDC_VERSION__) && __STDC_VERSION__ >= 201112L
   printf("C11 is supported!\n");
 #endif
 
