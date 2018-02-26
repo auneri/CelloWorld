@@ -16,6 +16,9 @@ elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options(${PROJECT_NAME}Executable PRIVATE /Wall)
 endif()
 
+set_property(TARGET ${PROJECT_NAME}Executable PROPERTY C_STANDARD 11)
+set_property(TARGET ${PROJECT_NAME}Executable PROPERTY C_EXTENSIONS OFF)
+
 include(CTest)
 enable_testing()
 add_test(
