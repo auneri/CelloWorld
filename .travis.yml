@@ -5,9 +5,6 @@ compiler: gcc
 dist: xenial
 sudo: required
 
-env:
-  - CMAKE_VERSION=3.14.3
-
 addons:
   apt:
     packages:
@@ -21,15 +18,8 @@ before_install:
   - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
 
 before_script:
-  - wget https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION.tar.gz
-  - tar xf cmake-$CMAKE_VERSION.tar.gz
-  - pushd cmake-$CMAKE_VERSION
-  - ./bootstrap
-  - make
-  - sudo make install
-  - popd
-  - mkdir build
-  - pushd build
+  - mkdir ./build
+  - pushd ./build
   - cmake
     -DBUILD_HelloC=ON
     -DBUILD_HelloCXX=ON
@@ -39,7 +29,8 @@ before_script:
     -DBUILD_HelloPythonSWIG=ON
     -DBUILD_HelloQt=ON
     ..
+  - popd
 
 script:
-  - cmake --build
-  - ctest -V .
+  - cmake --build ./build
+  - ctest -V ./build
