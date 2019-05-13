@@ -2,19 +2,13 @@ language: c
 
 compiler: gcc
 
-dist: trusty
+dist: xenial
 sudo: required
 
 addons:
   apt:
     packages:
-      - cmake
       - gfortran
-      - libboost-all-dev
-      - libinsighttoolkit4-dev
-      - libopenmpi-dev
-      - libvtk5-dev
-      - openmpi-bin
       - python-dev
       - qt5-default
       - swig
@@ -24,25 +18,26 @@ before_install:
   - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
 
 before_script:
+  - set CMAKE_VERSION=3.14.3
+  - wget https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION.tar.gz
+  - tar xf cmake-$CMAKE_VERSION.tar.gz
+  - pushd cmake-$CMAKE_VERSION
+  - ./bootstrap
+  - make
+  - sudo make install
+  - popd
   - mkdir build
-  - cd build
+  - pushd build
   - cmake
-    -DBUILD_HelloBoost=ON
     -DBUILD_HelloC=ON
-    -DBUILD_HelloCUDA=OFF
     -DBUILD_HelloCXX=ON
-    -DBUILD_HelloCudaTools=OFF
     -DBUILD_HelloFortran=ON
-    -DBUILD_HelloITK=ON
-    -DBUILD_HelloMATLAB=OFF
-    -DBUILD_HelloMPI=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
     -DBUILD_HelloQt=ON
-    -DBUILD_HelloVTK=ON
     ..
 
 script:
-  - make
-  - make test ARGS="--extra-verbose"
+  - cmake --build
+  - ctest -V .
