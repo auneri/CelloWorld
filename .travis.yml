@@ -5,6 +5,9 @@ compiler: gcc
 dist: xenial
 sudo: required
 
+env:
+  - CMAKE_VERSION=3.14.3
+
 addons:
   apt:
     packages:
@@ -18,7 +21,6 @@ before_install:
   - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
 
 before_script:
-  - set CMAKE_VERSION=3.14.3
   - wget https://github.com/Kitware/CMake/releases/download/v$CMAKE_VERSION/cmake-$CMAKE_VERSION.tar.gz
   - tar xf cmake-$CMAKE_VERSION.tar.gz
   - pushd cmake-$CMAKE_VERSION
