@@ -1,30 +1,27 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(HelloBoost)
+project(HelloBoost LANGUAGES CXX)
 
-if(WIN32)
-  set(Boost_ROOT_DIR "" CACHE PATH "")
-  set(BOOST_ROOT ${Boost_ROOT_DIR})
-endif()
-set(Boost_USE_STATIC_LIBS ON)
-find_package(Boost COMPONENTS program_options REQUIRED)
+set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${PROJECT_NAME}Executable
+find_package(Boost QUIET REQUIRED COMPONENTS program_options)
+
+add_executable(${EXECUTABLE}
   main.cxx)
 
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Weverything -Wfatal-errors)
-elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wfatal-errors)
-elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE /Wall)
-endif()
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:MSVC>:/Wall>")
 
-target_link_libraries(${PROJECT_NAME}Executable
-  PRIVATE ${Boost_LIBRARIES})
+target_include_directories(${EXECUTABLE} PRIVATE
+  ${Boost_INCLUDE_DIRS})
+
+target_link_libraries(${EXECUTABLE} PRIVATE
+  ${Boost_LIBRARIES})
 
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>")
