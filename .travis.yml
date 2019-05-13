@@ -28,5 +28,7 @@ before_script:
   - popd
 
 script:
-  - cmake --build ./build
-  - ctest -V ./build
+  - pushd ./build
+  - cmake --build .
+  - ctest -V
+  - popd
