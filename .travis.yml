@@ -13,10 +13,6 @@ addons:
       - qt5-default
       - swig
 
-# https://github.com/travis-ci/travis-ci/issues/5326
-before_install:
-  - export PATH=$(echo $PATH | tr ':' "\n" | sed '/\/opt\/python/d' | tr "\n" ":" | sed "s|::|:|g")
-
 before_script:
   - mkdir ./build
   - pushd ./build
