@@ -1,4 +1,10 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
+if(POLICY CMP0078)  # introduced in CMake v3.13
+  cmake_policy(SET CMP0078 NEW)
+endif()
+if(POLICY CMP0086)  # introduced in CMake v3.14
+  cmake_policy(SET CMP0086 NEW)
+endif()
 
 project(HelloPythonSWIG LANGUAGES C)
 
@@ -22,19 +28,20 @@ target_compile_options(${LIBRARY} PUBLIC
   "$<$<C_COMPILER_ID:MSVC>:/W3>")
 
 swig_add_library(${MODULE} LANGUAGE python SOURCES library.i)
+set(MODULE_REAL ${SWIG_MODULE_${MODULE}_REAL_NAME})
 
-target_include_directories(${MODULE} PRIVATE
+target_include_directories(${MODULE_REAL} PRIVATE
   ${PROJECT_SOURCE_DIR}
   ${Python_INCLUDE_DIRS})
 
-target_link_libraries(${MODULE} PRIVATE
+target_link_libraries(${MODULE_REAL} PRIVATE
   ${LIBRARY}
   ${Python_LIBRARIES})
 
 add_custom_command(
-  TARGET ${MODULE}
+  TARGET ${MODULE_REAL}
   POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE}>" "Python/$<TARGET_FILE_NAME:${MODULE}>"
+  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE_REAL}>" "Python/$<TARGET_FILE_NAME:${MODULE_REAL}>"
   COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}.py" "Python/${MODULE}.py"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
