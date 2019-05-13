@@ -6,7 +6,8 @@ find_package(Python QUIET REQUIRED COMPONENTS Development Interpreter)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE} main.cxx)
+add_executable(${EXECUTABLE}
+  main.cxx)
 
 target_compile_options(${EXECUTABLE} PUBLIC
   "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"

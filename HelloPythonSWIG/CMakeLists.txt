@@ -15,7 +15,8 @@ include(${SWIG_USE_FILE})
 set(LIBRARY ${PROJECT_NAME}Library)
 set(MODULE ${PROJECT_NAME})
 
-add_library(${LIBRARY} library.c)
+add_library(${LIBRARY}
+  library.c)
 
 set_target_properties(${EXECUTABLE} PROPERTIES
   C_STANDARD 11
@@ -27,7 +28,9 @@ target_compile_options(${LIBRARY} PUBLIC
   "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<C_COMPILER_ID:MSVC>:/W3>")
 
-swig_add_library(${MODULE} LANGUAGE python SOURCES library.i)
+swig_add_library(${MODULE}
+  LANGUAGE python
+  SOURCES library.i)
 set(MODULE_REAL ${SWIG_MODULE_${MODULE}_REAL_NAME})
 
 target_include_directories(${MODULE_REAL} PRIVATE

@@ -4,7 +4,8 @@ project(HelloCUDA LANGUAGES CUDA)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE} main.cu)
+add_executable(${EXECUTABLE}
+  main.cu)
 
 include(CTest)
 enable_testing()
