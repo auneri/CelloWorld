@@ -1,6 +1,8 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
 project(CelloWorld)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 
 file(GLOB FOLDERS "${PROJECT_SOURCE_DIR}/Hello*")
 foreach(FOLDER ${FOLDERS})

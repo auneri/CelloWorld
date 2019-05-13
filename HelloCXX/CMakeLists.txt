@@ -1,26 +1,23 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-if(POLICY CMP0054)
-  cmake_policy(SET CMP0054 NEW)
-endif()
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(HelloCpp CXX)
+project(HelloCxx LANGUAGES CXX)
 
-add_executable(${PROJECT_NAME}Executable
-  main.cxx)
+set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Weverything -Wfatal-errors)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wfatal-errors)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE /Wall)
-endif()
+add_executable(${EXECUTABLE} main.cxx)
 
-set_property(TARGET ${PROJECT_NAME}Executable PROPERTY CXX_STANDARD 11)
-set_property(TARGET ${PROJECT_NAME}Executable PROPERTY CXX_EXTENSIONS OFF)
+set_target_properties(${EXECUTABLE} PROPERTIES
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
+  CXX_EXTENSIONS OFF)
+
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
 
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>")

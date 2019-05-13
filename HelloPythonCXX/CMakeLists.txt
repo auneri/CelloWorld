@@ -1,20 +1,32 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(HelloPythonCpp CXX)
+project(HelloPythonCxx LANGUAGES CXX)
 
-find_package(PythonInterp REQUIRED)
+find_package(Python QUIET REQUIRED COMPONENTS Development Interpreter)
 
-find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIRS})
+set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${PROJECT_NAME}Executable
-  main.cxx)
+add_executable(${EXECUTABLE} main.cxx)
 
-target_link_libraries(${PROJECT_NAME}Executable
-  ${PYTHON_LIBRARIES})
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
+
+target_include_directories(${EXECUTABLE} PRIVATE
+  ${Python_INCLUDE_DIRS})
+
+target_link_libraries(${EXECUTABLE} PRIVATE
+  ${Python_LIBRARIES})
 
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>")
+
+if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+  get_filename_component(PYTHONHOME ${Python_EXECUTABLE} DIRECTORY)
+  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+    ENVIRONMENT "PYTHONHOME=${PYTHONHOME}")
+endif()

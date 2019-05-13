@@ -1,29 +1,40 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(HelloPythonC C)
+project(HelloPythonC LANGUAGES C)
 
-find_package(PythonInterp REQUIRED)
+find_package(Python QUIET REQUIRED COMPONENTS Development Interpreter)
 
-find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
-include_directories(${PYTHON_INCLUDE_DIRS})
+set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${PROJECT_NAME}Executable
-  main.c)
+add_executable(${EXECUTABLE} main.c)
 
-target_link_libraries(${PROJECT_NAME}Executable
-  ${PYTHON_LIBRARIES})
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<C_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<C_COMPILER_ID:MSVC>:/W3>")
+
+target_include_directories(${EXECUTABLE} PRIVATE
+  ${Python_INCLUDE_DIRS})
+
+target_link_libraries(${EXECUTABLE} PRIVATE
+  ${Python_LIBRARIES})
 
 configure_file(
   tests.py
   ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Tests.py
-  @ONLY)
+  COPYONLY)
 
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable> ${PROJECT_NAME}Tests argc)
-set_property(
-  TEST ${PROJECT_NAME}Tests
-  APPEND
-  PROPERTY ENVIRONMENT PYTHONPATH=${PROJECT_BINARY_DIR})
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>" "${PROJECT_NAME}Tests" argc)
+
+if(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
+  get_filename_component(PYTHONHOME ${Python_EXECUTABLE} DIRECTORY)
+  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+    ENVIRONMENT "PYTHONHOME=${PYTHONHOME};PYTHONPATH=${PROJECT_BINARY_DIR}")
+else()
+  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+    ENVIRONMENT "PYTHONPATH=${PROJECT_BINARY_DIR}")
+endif()

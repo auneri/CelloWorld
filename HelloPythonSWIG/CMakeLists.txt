@@ -1,56 +1,56 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-if(POLICY CMP0054)
-  cmake_policy(SET CMP0054 NEW)
-endif()
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(HelloPythonSWIG)
+project(HelloPythonSWIG LANGUAGES C)
 
-add_library(${PROJECT_NAME}Library
-  library.cxx)
-
-if(CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-  target_compile_options(${PROJECT_NAME}Library PRIVATE -Weverything -Wfatal-errors)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-  target_compile_options(${PROJECT_NAME}Library PRIVATE -Wall -Wextra -Wfatal-errors)
-elseif(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  target_compile_options(${PROJECT_NAME}Library PRIVATE /Wall)
-endif()
-
-find_package(PythonInterp REQUIRED)
-find_package(PythonLibs ${PYTHON_VERSION_STRING} EXACT REQUIRED)
+find_package(Python QUIET REQUIRED COMPONENTS Development)
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
-set_source_files_properties(library.i PROPERTIES CPLUSPLUS ON)
-if(CMAKE_VERSION VERSION_LESS 3.8)
-  swig_add_module(${PROJECT_NAME} python library.i)
-else()
-  swig_add_library(${PROJECT_NAME} LANGUAGE python SOURCES library.i)
-endif()
-swig_link_libraries(${PROJECT_NAME}
-  ${PROJECT_NAME}Library
-  ${PYTHON_LIBRARIES})
-target_include_directories(${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME} PRIVATE
+set(LIBRARY ${PROJECT_NAME}Library)
+set(MODULE ${PROJECT_NAME})
+
+add_library(${LIBRARY} library.c)
+
+set_target_properties(${EXECUTABLE} PROPERTIES
+  C_STANDARD 11
+  C_STANDARD_REQUIRED ON
+  C_EXTENSIONS OFF)
+
+target_compile_options(${LIBRARY} PUBLIC
+  "$<$<C_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<C_COMPILER_ID:MSVC>:/W3>")
+
+swig_add_library(${MODULE} LANGUAGE python SOURCES library.i)
+
+target_include_directories(${MODULE} PRIVATE
   ${PROJECT_SOURCE_DIR}
-  ${PYTHON_INCLUDE_PATH})
+  ${Python_INCLUDE_DIRS})
+
+target_link_libraries(${MODULE} PRIVATE
+  ${LIBRARY}
+  ${Python_LIBRARIES})
+
 add_custom_command(
-  TARGET ${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME} POST_BUILD
-  COMMAND ${CMAKE_COMMAND} -E copy $<TARGET_FILE:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}> Python/$<TARGET_FILE_NAME:${SWIG_MODULE_${PROJECT_NAME}_REAL_NAME}>
-  COMMAND ${CMAKE_COMMAND} -E copy ${PROJECT_NAME}.py Python/${PROJECT_NAME}.py
+  TARGET ${MODULE}
+  POST_BUILD
+  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE}>" "Python/$<TARGET_FILE_NAME:${MODULE}>"
+  COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}.py" "Python/${MODULE}.py"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
-if(PYTHON_EXECUTABLE)
+find_package(Python QUIET COMPONENTS Interpreter)
+if(Python_EXECUTABLE)
   configure_file(
     tests.py
-    ${PROJECT_BINARY_DIR}/Python/${PROJECT_NAME}Tests.py
-    @ONLY)
+    ${PROJECT_BINARY_DIR}/Python/${MODULE}Tests.py
+    COPYONLY)
 
   include(CTest)
   enable_testing()
   add_test(
     NAME ${PROJECT_NAME}Tests
-    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python
-    COMMAND ${PYTHON_EXECUTABLE} -m ${PROJECT_NAME}Tests)
+    COMMAND "${Python_EXECUTABLE}" -m "${MODULE}Tests"
+    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python)
 else()
-  message(WARNING "PYTHON_EXECUTABLE needs to be defined to run the tests")
+  message(WARNING "Python_EXECUTABLE needs to be defined to run the tests")
 endif()

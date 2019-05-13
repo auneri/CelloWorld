@@ -1,14 +1,13 @@
+#include <cassert>
 #include <cstdlib>
 #include <iostream>
 
 
 int main(int, char *[]) {
 
-  std::cout << "hello, world" << std::endl;
+  assert(__cplusplus >= 201103L);
 
-#if defined(__cplusplus) && __cplusplus >= 201103L
-  std::cout << "C++11 is supported!" << std::endl;
-#endif
+  std::cout << "hello, world" << std::endl;
 
   return EXIT_SUCCESS;
 }

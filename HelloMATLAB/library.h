@@ -1,5 +1,5 @@
-#ifndef HELLOMATLAB_LIBRARY_H_
-#define HELLOMATLAB_LIBRARY_H_
+#ifndef LIBRARY_H_
+#define LIBRARY_H_
 
 #ifndef EXPORT
 #  ifdef _WIN32
@@ -20,4 +20,4 @@ EXPORT int sub(int a, int b);
 }
 #endif
 
-#endif  // HELLOMATLAB_LIBRARY_H_
+#endif  // LIBRARY_H_

@@ -1,5 +1,5 @@
-#ifndef WINDOW_H
-#define WINDOW_H
+#ifndef WINDOW_H_
+#define WINDOW_H_
 
 #include <QMainWindow>
 #include <QObject>
@@ -12,4 +12,4 @@ class Window : public QMainWindow {
   Window();
 };
 
-#endif
+#endif  // WINDOW_H_

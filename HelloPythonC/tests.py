@@ -1,8 +1,8 @@
-import @PROJECT_NAME@
+import HelloPythonC
 
 
 def argc(*args):
-    print("Argument count:", @PROJECT_NAME@.argc())
+    print('Argument count:', HelloPythonC.argc())
 
 
 def multiply(*args):

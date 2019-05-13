@@ -1,19 +1,16 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
-if(POLICY CMP0054)
-  cmake_policy(SET CMP0054 NEW)
-endif()
+cmake_minimum_required(VERSION 3.14 FATAL_ERROR)
 
-project(HelloFortran Fortran)
+project(HelloFortran LANGUAGES Fortran)
 
-add_executable(${PROJECT_NAME}Executable
-  main.f)
+set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-if(CMAKE_Fortran_COMPILER_ID STREQUAL "GNU")
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
-endif()
+add_executable(${EXECUTABLE} main.f)
+
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wpedantic;-Wfatal-errors>")
 
 include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests
-  COMMAND $<TARGET_FILE:${PROJECT_NAME}Executable>)
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>")

@@ -1,7 +1,7 @@
-#ifndef HELLOPYTHON_LIBRARY_H_
-#define HELLOPYTHON_LIBRARY_H_
+#ifndef LIBRARY_H_
+#define LIBRARY_H_
 
 int add(int a, int b);
 int sub(int a, int b);
 
-#endif  // HELLOPYTHON_LIBRARY_H_
+#endif  // LIBRARY_H_

@@ -1,4 +1,4 @@
-APP = HelloCppExecutable
+APP = HelloCxxExecutable
 OBJ = main.o
 
 CXX ?= g++
