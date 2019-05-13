@@ -8,6 +8,7 @@ static int ARGC = 0;
 
 
 static PyObject* HelloPythonC_argc(PyObject *self, PyObject *args) {
+  (void)self;
   if (!PyArg_ParseTuple(args, ":argc")) return NULL;
   return PyLong_FromLong(ARGC);
 }
