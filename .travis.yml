@@ -26,9 +26,11 @@ before_script:
   - cmake
     -DBUILD_HelloBoost=ON
     -DBUILD_HelloC=ON
+    -DBUILD_HelloCUDA=OFF
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
     -DBUILD_HelloITK=ON
+    -DBUILD_HelloMATLAB=OFF
     -DBUILD_HelloMPI=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
