@@ -12,6 +12,7 @@ addons:
       - libboost-all-dev
       - libfftw3-dev
       - libinsighttoolkit4-dev
+      - libproj-dev
       - libvtk6-dev
       - python-dev
       - qt5-default
