@@ -10,6 +10,7 @@ addons:
     packages:
       - gfortran
       - libboost-all-dev
+      - libfftw3-dev
       - libinsighttoolkit4-dev
       - libvtk6-dev
       - python-dev
