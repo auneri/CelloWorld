@@ -1,20 +1,19 @@
-cmake_minimum_required(VERSION 2.8.12 FATAL_ERROR)
+cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(HelloVTK)
+project(HelloVTK LANGUAGES CXX)
 
 find_package(VTK REQUIRED)
 include(${VTK_USE_FILE})
 
-add_executable(${PROJECT_NAME}Executable
+set(EXECUTABLE ${PROJECT_NAME}Executable)
+
+add_executable(${EXECUTABLE}
   main.cxx)
 
-if(${CMAKE_CXX_COMPILER_ID} STREQUAL Clang)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wfatal-errors)
-elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE -Wall -Wextra -Wfatal-errors)
-elseif(${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC)
-  target_compile_options(${PROJECT_NAME}Executable PRIVATE /W4)
-endif()
+target_compile_options(${EXECUTABLE} PUBLIC
+  "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
+  "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
 
-target_link_libraries(${PROJECT_NAME}Executable
-  PRIVATE ${VTK_LIBRARIES})
+target_link_libraries(${EXECUTABLE} PRIVATE
+  ${VTK_LIBRARIES})

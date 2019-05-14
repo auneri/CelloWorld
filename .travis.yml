@@ -10,6 +10,8 @@ addons:
     packages:
       - gfortran
       - libboost-all-dev
+      - libinsighttoolkit4-dev
+      - libvtk6-dev
       - python-dev
       - qt5-default
       - swig
@@ -22,10 +24,12 @@ before_script:
     -DBUILD_HelloC=ON
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
+    -DBUILD_HelloITK=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
     -DBUILD_HelloQt=ON
+    -DBUILD_HelloVTK=ON
     ..
   - popd
 
