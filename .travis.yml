@@ -12,8 +12,10 @@ addons:
       - libboost-all-dev
       - libfftw3-dev
       - libinsighttoolkit4-dev
+      - libopenmpi-dev
       - libproj-dev
       - libvtk6-dev
+      - openmpi-bin
       - python-dev
       - qt5-default
       - swig
@@ -27,6 +29,7 @@ before_script:
     -DBUILD_HelloCXX=ON
     -DBUILD_HelloFortran=ON
     -DBUILD_HelloITK=ON
+    -DBUILD_HelloMPI=ON
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
