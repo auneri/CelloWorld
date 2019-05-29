@@ -17,7 +17,6 @@ target_compile_options(${EXECUTABLE} PUBLIC
   "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
 
-include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests

@@ -13,5 +13,4 @@ foreach(FOLDER ${FOLDERS})
   endif()
 endforeach()
 
-include(CTest)
 enable_testing()

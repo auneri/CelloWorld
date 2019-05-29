@@ -25,7 +25,6 @@ configure_file(
   ${PROJECT_BINARY_DIR}/${PROJECT_NAME}Tests.py
   COPYONLY)
 
-include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests

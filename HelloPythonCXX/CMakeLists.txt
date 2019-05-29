@@ -20,7 +20,6 @@ target_include_directories(${EXECUTABLE} PRIVATE
 target_link_libraries(${EXECUTABLE} PRIVATE
   ${Python_LIBRARIES})
 
-include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests

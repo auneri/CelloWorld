@@ -10,7 +10,6 @@ add_executable(${EXECUTABLE}
 target_compile_options(${EXECUTABLE} PUBLIC
   "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wpedantic;-Wfatal-errors>")
 
-include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests

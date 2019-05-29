@@ -18,7 +18,6 @@ target_compile_options(${EXECUTABLE} PUBLIC
 target_link_libraries(${EXECUTABLE} PRIVATE
   ${ITK_LIBRARIES})
 
-include(CTest)
 enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Tests

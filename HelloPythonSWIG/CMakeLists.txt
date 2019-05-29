@@ -55,7 +55,6 @@ if(Python_EXECUTABLE)
     ${PROJECT_BINARY_DIR}/Python/${MODULE}Tests.py
     COPYONLY)
 
-  include(CTest)
   enable_testing()
   add_test(
     NAME ${PROJECT_NAME}Tests

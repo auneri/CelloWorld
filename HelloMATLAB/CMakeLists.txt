@@ -32,7 +32,6 @@ if(MATLAB_EXECUTABLE)
     "catch err; fprintf(2, '%s\\n', getReport(err, 'extended')); exit(1)"
     "end; exit(0)")
 
-  include(CTest)
   enable_testing()
   if(UNIX)
     add_test(
