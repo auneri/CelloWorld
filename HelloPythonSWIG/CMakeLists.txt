@@ -18,7 +18,7 @@ set(MODULE ${PROJECT_NAME})
 add_library(${LIBRARY}
   library.c)
 
-set_target_properties(${EXECUTABLE} PROPERTIES
+set_target_properties(${LIBRARY} PROPERTIES
   C_STANDARD 11
   C_STANDARD_REQUIRED ON
   C_EXTENSIONS OFF)
