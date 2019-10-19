@@ -1,4 +1,4 @@
-%module HelloPythonSWIG
+%module HelloPythonCSWIG
 
 %{
   #include <library.h>

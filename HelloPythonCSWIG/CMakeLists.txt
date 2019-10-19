@@ -6,7 +6,7 @@ if(POLICY CMP0086)  # introduced in CMake v3.14
   cmake_policy(SET CMP0086 NEW)
 endif()
 
-project(HelloPythonSWIG LANGUAGES C)
+project(HelloPythonCSWIG LANGUAGES C)
 
 find_package(Python QUIET REQUIRED COMPONENTS Development)
 find_package(SWIG REQUIRED)
