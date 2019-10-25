@@ -14,3 +14,10 @@ foreach(FOLDER ${FOLDERS})
 endforeach()
 
 enable_testing()
+
+if (CMAKE_CONFIGURATION_TYPES)
+  add_custom_target(test_verbose ${CMAKE_CTEST_COMMAND} --force-new-ctest-process --output-on-failure --build-config "$<CONFIGURATION>")
+else()
+  add_custom_target(test_verbose ${CMAKE_CTEST_COMMAND} --force-new-ctest-process --output-on-failure)
+endif()
+set_target_properties(test_verbose PROPERTIES PROJECT_LABEL "RUN_TESTS_VERBOSE")
