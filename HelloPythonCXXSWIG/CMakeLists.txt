@@ -30,7 +30,7 @@ target_compile_options(${LIBRARY} PUBLIC
 
 set_source_files_properties(library.i PROPERTIES
   CPLUSPLUS ON
-  SWIG_FLAGS "-builtin")
+  SWIG_FLAGS "-builtin;-py3")
 swig_add_library(${MODULE}
   LANGUAGE python
   SOURCES library.i)

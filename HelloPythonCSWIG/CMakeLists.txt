@@ -28,6 +28,8 @@ target_compile_options(${LIBRARY} PUBLIC
   "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<C_COMPILER_ID:MSVC>:/W3>")
 
+set_source_files_properties(library.i PROPERTIES
+  SWIG_FLAGS "-builtin;-py3")
 swig_add_library(${MODULE}
   LANGUAGE python
   SOURCES library.i)

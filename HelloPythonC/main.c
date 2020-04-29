@@ -20,7 +20,6 @@ static PyMethodDef HelloPythonCMethods[] = {
 };
 
 
-#if PY_MAJOR_VERSION >= 3
 static PyModuleDef HelloPythonCModule = {
   PyModuleDef_HEAD_INIT, "HelloPythonC", NULL, -1, HelloPythonCMethods, NULL, NULL, NULL, NULL
 };
@@ -29,11 +28,6 @@ static PyModuleDef HelloPythonCModule = {
 static PyObject* PyInit_HelloPythonC(void) {
   return PyModule_Create(&HelloPythonCModule);
 }
-#else
-static void PyInit_HelloPythonC(void) {
-  Py_InitModule3("HelloPythonC", HelloPythonCMethods, NULL);
-}
-#endif
 
 
 int main(int argc, char *argv[]) {
@@ -48,11 +42,7 @@ int main(int argc, char *argv[]) {
 
   PyImport_AppendInittab("HelloPythonC", &PyInit_HelloPythonC);
   Py_Initialize();
-#if PY_MAJOR_VERSION >= 3
   pName = PyUnicode_DecodeFSDefault(argv[1]);  // error checking of pName left out
-#else
-  pName = Py_BuildValue("s", argv[1]);  // error checking of pName left out
-#endif
 
   pModule = PyImport_Import(pName);
   Py_DECREF(pName);
