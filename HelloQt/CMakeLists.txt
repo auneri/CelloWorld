@@ -23,3 +23,8 @@ target_compile_options(${EXECUTABLE} PRIVATE
   "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
 
 target_link_libraries(${EXECUTABLE} PRIVATE Qt5::Widgets)
+
+enable_testing()
+add_test(
+  NAME ${PROJECT_NAME}Tests
+  COMMAND "$<TARGET_FILE:${EXECUTABLE}>" "--no-gui")
