@@ -33,15 +33,21 @@ set_source_files_properties(library.i PROPERTIES
 swig_add_library(${MODULE}
   LANGUAGE python
   SOURCES library.i)
-set(MODULE_REAL ${SWIG_MODULE_${MODULE}_REAL_NAME})
 
-target_include_directories(${MODULE_REAL} PRIVATE
+target_include_directories(${MODULE} PRIVATE
   ${PROJECT_SOURCE_DIR}
   ${Python_INCLUDE_DIRS})
 
-target_link_libraries(${MODULE_REAL} PRIVATE
-  ${LIBRARY}
-  ${Python_LIBRARIES})
+target_link_libraries(${MODULE} PRIVATE
+  ${LIBRARY})
+
+if(APPLE)
+  set_target_properties(${MODULE} PROPERTIES
+    LINK_FLAGS "-undefined dynamic_lookup")
+else()
+  target_link_libraries(${MODULE} PRIVATE
+    ${Python_LIBRARIES})
+endif()
 
 configure_file(
   tests.py
@@ -49,9 +55,9 @@ configure_file(
   COPYONLY)
 
 add_custom_command(
-  TARGET ${MODULE_REAL}
+  TARGET ${MODULE}
   POST_BUILD
-  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE_REAL}>" "Python/$<TARGET_FILE_NAME:${MODULE_REAL}>"
+  COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE}>" "Python/$<TARGET_FILE_NAME:${MODULE}>"
   COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}.py" "Python/${MODULE}.py"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
