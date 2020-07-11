@@ -43,5 +43,5 @@ before_script:
 script:
   - pushd ./build
   - cmake --build .
-  - ctest -V
+  - cmake --build . --target test_verbose
   - popd
