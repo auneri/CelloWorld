@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(HelloPythonCxx LANGUAGES CXX)
+project(HelloPythonCXX LANGUAGES CXX)
 
 find_package(Python QUIET REQUIRED COMPONENTS Development Interpreter)
 

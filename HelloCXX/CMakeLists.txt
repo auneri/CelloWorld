@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.12 FATAL_ERROR)
 
-project(HelloCxx LANGUAGES CXX)
+project(HelloCXX LANGUAGES CXX)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
