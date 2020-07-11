@@ -2,7 +2,7 @@ language: c
 
 compiler: gcc
 
-dist: xenial
+dist: bionic
 sudo: required
 
 addons:
@@ -14,9 +14,9 @@ addons:
       - libinsighttoolkit4-dev
       - libopenmpi-dev
       - libproj-dev
-      - libvtk6-dev
+      - libvtk7-dev
       - openmpi-bin
-      - python-dev
+      - python3-dev
       - qt5-default
       - swig
 
