@@ -2,7 +2,9 @@ cmake_minimum_required(VERSION 3.13 FATAL_ERROR)
 
 project(HelloPythonCXX LANGUAGES CXX)
 
-find_package(Python QUIET REQUIRED COMPONENTS Development Interpreter)
+set(Python_FIND_FRAMEWORK LAST)
+set(Python_FIND_VIRTUALENV ONLY)
+find_package(Python REQUIRED COMPONENTS Development Interpreter)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 

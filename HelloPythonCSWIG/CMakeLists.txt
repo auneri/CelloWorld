@@ -5,7 +5,10 @@ endif()
 
 project(HelloPythonCSWIG LANGUAGES C)
 
-find_package(Python QUIET REQUIRED COMPONENTS Development)
+set(Python_FIND_FRAMEWORK LAST)
+set(Python_FIND_VIRTUALENV ONLY)
+find_package(Python REQUIRED COMPONENTS Development Interpreter)
+
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
 
@@ -40,6 +43,11 @@ target_link_libraries(${MODULE_REAL} PRIVATE
   ${LIBRARY}
   ${Python_LIBRARIES})
 
+configure_file(
+  tests.py
+  ${PROJECT_BINARY_DIR}/Python/${MODULE}Tests.py
+  COPYONLY)
+
 add_custom_command(
   TARGET ${MODULE_REAL}
   POST_BUILD
@@ -47,18 +55,8 @@ add_custom_command(
   COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}.py" "Python/${MODULE}.py"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
-find_package(Python QUIET COMPONENTS Interpreter)
-if(Python_EXECUTABLE)
-  configure_file(
-    tests.py
-    ${PROJECT_BINARY_DIR}/Python/${MODULE}Tests.py
-    COPYONLY)
-
-  enable_testing()
-  add_test(
-    NAME ${PROJECT_NAME}Tests
-    COMMAND "${Python_EXECUTABLE}" -m "${MODULE}Tests"
-    WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python)
-else()
-  message(WARNING "Python_EXECUTABLE needs to be defined to run the tests")
-endif()
+enable_testing()
+add_test(
+  NAME ${PROJECT_NAME}Tests
+  COMMAND "${Python_EXECUTABLE}" -m "${MODULE}Tests"
+  WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python)
