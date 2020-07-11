@@ -35,7 +35,7 @@ before_script:
     -DBUILD_HelloPythonC=ON
     -DBUILD_HelloPythonCXX=ON
     -DBUILD_HelloPythonSWIG=ON
-    -DBUILD_HelloQt=ON
+    -DBUILD_HelloQt=OFF
     -DBUILD_HelloVTK=ON
     ..
   - popd
