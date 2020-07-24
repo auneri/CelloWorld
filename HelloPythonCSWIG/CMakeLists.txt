@@ -54,7 +54,7 @@ endif()
 
 configure_file(
   tests.py
-  ${PROJECT_BINARY_DIR}/Python/${MODULE}Tests.py
+  ${PROJECT_BINARY_DIR}/${MODULE}Tests.py
   COPYONLY)
 
 add_custom_command(
@@ -62,6 +62,7 @@ add_custom_command(
   POST_BUILD
   COMMAND "${CMAKE_COMMAND}" -E copy "$<TARGET_FILE:${MODULE}>" "Python/$<TARGET_FILE_NAME:${MODULE}>"
   COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}.py" "Python/${MODULE}.py"
+  COMMAND "${CMAKE_COMMAND}" -E copy "${MODULE}Tests.py" "Python/${MODULE}Tests.py"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
 enable_testing()
