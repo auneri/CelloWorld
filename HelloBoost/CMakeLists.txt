@@ -9,7 +9,7 @@ find_package(Boost QUIET REQUIRED COMPONENTS program_options)
 add_executable(${EXECUTABLE}
   main.cxx)
 
-target_compile_options(${EXECUTABLE} PUBLIC
+target_compile_options(${EXECUTABLE} PRIVATE
   "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:MSVC>:/Wall>")

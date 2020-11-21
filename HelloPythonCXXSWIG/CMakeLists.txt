@@ -26,7 +26,7 @@ set_target_properties(${LIBRARY} PROPERTIES
   CXX_STANDARD_REQUIRED ON
   CXX_EXTENSIONS OFF)
 
-target_compile_options(${LIBRARY} PUBLIC
+target_compile_options(${LIBRARY} PRIVATE
   "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:MSVC>:/W3>")

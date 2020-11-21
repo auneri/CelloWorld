@@ -12,7 +12,7 @@ set_target_properties(${EXECUTABLE} PROPERTIES
   C_STANDARD_REQUIRED ON
   C_EXTENSIONS OFF)
 
-target_compile_options(${EXECUTABLE} PUBLIC
+target_compile_options(${EXECUTABLE} PRIVATE
   "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<CXX_COMPILER_ID:MSVC>:/W4>")

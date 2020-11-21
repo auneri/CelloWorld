@@ -26,7 +26,7 @@ set_target_properties(${LIBRARY} PROPERTIES
   C_STANDARD_REQUIRED ON
   C_EXTENSIONS OFF)
 
-target_compile_options(${LIBRARY} PUBLIC
+target_compile_options(${LIBRARY} PRIVATE
   "$<$<C_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
   "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
   "$<$<C_COMPILER_ID:MSVC>:/W3>")
