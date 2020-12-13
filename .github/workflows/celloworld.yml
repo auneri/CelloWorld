@@ -1,0 +1,42 @@
+name: celloworld
+
+on: push
+
+env:
+  BUILD_TYPE: Release
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt-get install \
+          gfortran \
+          libboost-all-dev \
+          libfftw3-dev \
+          libinsighttoolkit4-dev \
+          libopenmpi-dev \
+          libvtk7-dev \
+          openmpi-bin \
+          python3-dev \
+          qt5-default \
+          swig
+      - run: cmake --version
+      - run: cmake -S . -B ./build \
+        -DBUILD_HelloBoost=ON \
+        -DBUILD_HelloC=ON \
+        -DBUILD_HelloCUDA=OFF \
+        -DBUILD_HelloCXX=ON \
+        -DBUILD_HelloFortran=ON \
+        -DBUILD_HelloITK=ON \
+        -DBUILD_HelloMATLAB=OFF \
+        -DBUILD_HelloMPI=ON \
+        -DBUILD_HelloPythonC=ON \
+        -DBUILD_HelloPythonCXX=ON \
+        -DBUILD_HelloPythonSWIG=ON \
+        -DBUILD_HelloQt=OFF \
+        -DBUILD_HelloVTK=ON
+      - run: cmake --build ./build
+      - run: cmake --build ./build --target test_verbose
