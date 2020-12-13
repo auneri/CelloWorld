@@ -13,7 +13,8 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get update
-      - run: >-
+      - name: sudo apt-get install ...
+        run: >-
           sudo apt-get install
           gfortran
           libboost-all-dev
@@ -26,7 +27,8 @@ jobs:
           qt5-default
           swig
       - run: cmake --version
-      - run: >-
+      - name: cmake -S . -B ./build ...
+        run: >-
           cmake -S . -B ./build
           -DBUILD_HelloBoost=ON
           -DBUILD_HelloC=ON
