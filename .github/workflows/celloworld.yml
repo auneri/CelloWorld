@@ -13,7 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - run: sudo apt-get update
-      - name: sudo apt-get install ...
+      - name: Run sudo apt-get install ...
         run: >-
           sudo apt-get install
           gfortran
@@ -27,7 +27,7 @@ jobs:
           qt5-default
           swig
       - run: cmake --version
-      - name: cmake -S . -B ./build ...
+      - name: Run cmake -S . -B ./build ...
         run: >-
           cmake -S . -B ./build
           -DBUILD_HelloBoost=ON
