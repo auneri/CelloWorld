@@ -4,10 +4,10 @@
 class Library {
 
  public:
-  Library(int x) { value_ = x; }
+  Library(int x);
 
-  int add(int x) { value_ += x; return value_; }
-  int sub(int x) { value_ -= x; return value_; }
+  int add(int x);
+  int sub(int x);
 
  private:
   int value_;
