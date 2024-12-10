@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.15)
 
 project(HelloQt LANGUAGES CXX)
 
-find_package(Qt5 REQUIRED COMPONENTS Core Widgets)
+find_package(Qt6 COMPONENTS Core Widgets)
+if(NOT Qt6_FOUND)
+  find_package(Qt5 5.15 REQUIRED COMPONENTS Core Widgets)
+endif()
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
@@ -25,7 +28,7 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   target_compile_options(${EXECUTABLE} PRIVATE /W4)
 endif()
 
-target_link_libraries(${EXECUTABLE} PRIVATE Qt5::Widgets)
+target_link_libraries(${EXECUTABLE} PRIVATE Qt::Widgets)
 
 enable_testing()
 add_test(
