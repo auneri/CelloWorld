@@ -9,6 +9,11 @@ set(EXECUTABLE ${PROJECT_NAME}Executable)
 add_executable(${EXECUTABLE}
   main.c)
 
+set_target_properties(${EXECUTABLE} PROPERTIES
+  C_STANDARD 11
+  C_STANDARD_REQUIRED ON
+  C_EXTENSIONS OFF)
+
 if(CMAKE_C_COMPILER_ID MATCHES "Clang")
   target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wfatal-errors)
 elseif(CMAKE_C_COMPILER_ID MATCHES "GNU")

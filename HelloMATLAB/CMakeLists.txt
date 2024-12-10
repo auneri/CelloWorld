@@ -1,10 +1,15 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(HelloMATLAB LANGUAGES C)
+project(HelloMATLAB LANGUAGES CXX)
 
 set(LIBRARY ${PROJECT_NAME}Library)
 
 add_library(${LIBRARY} SHARED library.cxx)
+
+set_target_properties(${LIBRARY} PROPERTIES
+  CXX_STANDARD 11
+  CXX_STANDARD_REQUIRED ON
+  CXX_EXTENSIONS OFF)
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   target_compile_options(${LIBRARY} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
