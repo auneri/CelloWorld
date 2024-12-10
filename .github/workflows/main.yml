@@ -16,10 +16,11 @@ jobs:
       - name: Run sudo apt-get install ...
         run: >-
           sudo apt-get install
+          build-essential
           gfortran
           libboost-all-dev
-          libopenmpi-dev
-          openmpi-bin
+          mpi-default-bin
+          mpi-default-dev
           python3-dev
           qt5-default
           swig
