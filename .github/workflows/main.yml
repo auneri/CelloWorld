@@ -11,17 +11,14 @@ jobs:
     runs-on: ubuntu-20.04
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: sudo apt-get update
       - name: Run sudo apt-get install ...
         run: >-
           sudo apt-get install
           gfortran
           libboost-all-dev
-          libfftw3-dev
-          libinsighttoolkit4-dev
           libopenmpi-dev
-          libvtk7-dev
           openmpi-bin
           python3-dev
           qt5-default
@@ -34,14 +31,14 @@ jobs:
           -DBUILD_HelloC=ON
           -DBUILD_HelloCUDA=OFF
           -DBUILD_HelloCXX=ON
+          -DBUILD_HelloEnvironment=ON
           -DBUILD_HelloFortran=ON
-          -DBUILD_HelloITK=ON
           -DBUILD_HelloMATLAB=OFF
           -DBUILD_HelloMPI=ON
           -DBUILD_HelloPythonC=ON
+          -DBUILD_HelloPythonCSWIG=ON
           -DBUILD_HelloPythonCXX=ON
-          -DBUILD_HelloPythonSWIG=ON
+          -DBUILD_HelloPythonCXXSWIG=ON
           -DBUILD_HelloQt=OFF
-          -DBUILD_HelloVTK=ON
       - run: cmake --build ./build
       - run: cmake --build ./build --target test_verbose
