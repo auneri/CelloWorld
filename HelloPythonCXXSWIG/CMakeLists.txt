@@ -12,8 +12,7 @@ include(${SWIG_USE_FILE})
 set(LIBRARY ${PROJECT_NAME}Library)
 set(MODULE ${PROJECT_NAME})
 
-add_library(${LIBRARY}
-  library.cxx)
+add_library(${LIBRARY} library.cxx)
 
 set_target_properties(${LIBRARY} PROPERTIES
   CXX_STANDARD 11
@@ -39,9 +38,7 @@ target_include_directories(${MODULE} PRIVATE
   ${PROJECT_SOURCE_DIR}
   ${Python_INCLUDE_DIRS})
 
-target_link_libraries(${MODULE} PRIVATE
-  ${LIBRARY})
-
+target_link_libraries(${MODULE} PRIVATE ${LIBRARY})
 if(APPLE)
   set_target_properties(${MODULE} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 else()

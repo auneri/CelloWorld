@@ -6,8 +6,7 @@ find_package(MPI REQUIRED COMPONENTS C)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE}
-  main.c)
+add_executable(${EXECUTABLE} main.c)
 
 set_target_properties(${EXECUTABLE} PROPERTIES
   C_STANDARD 11
@@ -22,11 +21,9 @@ elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
   target_compile_options(${EXECUTABLE} PRIVATE /W4)
 endif()
 
-target_include_directories(${EXECUTABLE} PRIVATE
-  ${MPI_C_INCLUDE_DIRS})
+target_include_directories(${EXECUTABLE} PRIVATE ${MPI_C_INCLUDE_DIRS})
 
-target_link_libraries(${EXECUTABLE} PRIVATE
-  ${MPI_C_LIBRARIES})
+target_link_libraries(${EXECUTABLE} PRIVATE ${MPI_C_LIBRARIES})
 
 enable_testing()
 add_test(

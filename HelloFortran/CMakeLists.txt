@@ -4,8 +4,7 @@ project(HelloFortran LANGUAGES Fortran)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE}
-  main.f)
+add_executable(${EXECUTABLE} main.f)
 
 enable_testing()
 add_test(

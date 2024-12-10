@@ -4,8 +4,7 @@ project(HelloCXX LANGUAGES CXX)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE}
-  main.cxx)
+add_executable(${EXECUTABLE} main.cxx)
 
 set_target_properties(${EXECUTABLE} PROPERTIES
   CXX_STANDARD 11

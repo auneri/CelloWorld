@@ -4,8 +4,7 @@ project(HelloC LANGUAGES C)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE}
-  main.c)
+add_executable(${EXECUTABLE} main.c)
 
 set_target_properties(${EXECUTABLE} PROPERTIES
   C_STANDARD 11

@@ -8,8 +8,7 @@ find_package(Python REQUIRED COMPONENTS Development Interpreter)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-add_executable(${EXECUTABLE}
-  main.c)
+add_executable(${EXECUTABLE} main.c)
 
 if(CMAKE_C_COMPILER_ID MATCHES "Clang")
   target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
@@ -19,11 +18,9 @@ elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
   target_compile_options(${EXECUTABLE} PRIVATE /W3)
 endif()
 
-target_include_directories(${EXECUTABLE} PRIVATE
-  ${Python_INCLUDE_DIRS})
+target_include_directories(${EXECUTABLE} PRIVATE ${Python_INCLUDE_DIRS})
 
-target_link_libraries(${EXECUTABLE} PRIVATE
-  ${Python_LIBRARIES})
+target_link_libraries(${EXECUTABLE} PRIVATE ${Python_LIBRARIES})
 
 configure_file(
   tests.py

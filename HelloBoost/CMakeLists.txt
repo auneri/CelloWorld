@@ -6,8 +6,7 @@ set(EXECUTABLE ${PROJECT_NAME}Executable)
 
 find_package(Boost QUIET REQUIRED COMPONENTS program_options)
 
-add_executable(${EXECUTABLE}
-  main.cxx)
+add_executable(${EXECUTABLE} main.cxx)
 
 set_target_properties(${EXECUTABLE} PROPERTIES
   CXX_STANDARD 11
@@ -22,11 +21,9 @@ elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   target_compile_options(${EXECUTABLE} PRIVATE /W4)
 endif()
 
-target_include_directories(${EXECUTABLE} PRIVATE
-  ${Boost_INCLUDE_DIRS})
+target_include_directories(${EXECUTABLE} PRIVATE ${Boost_INCLUDE_DIRS})
 
-target_link_libraries(${EXECUTABLE} PRIVATE
-  ${Boost_LIBRARIES})
+target_link_libraries(${EXECUTABLE} PRIVATE ${Boost_LIBRARIES})
 
 enable_testing()
 add_test(
