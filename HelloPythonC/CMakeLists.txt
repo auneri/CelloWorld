@@ -11,10 +11,13 @@ set(EXECUTABLE ${PROJECT_NAME}Executable)
 add_executable(${EXECUTABLE}
   main.c)
 
-target_compile_options(${EXECUTABLE} PRIVATE
-  "$<$<C_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
-  "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
-  "$<$<C_COMPILER_ID:MSVC>:/W3>")
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+  target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_C_COMPILER_ID MATCHES "GNU")
+  target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
+  target_compile_options(${EXECUTABLE} PRIVATE /W3)
+endif()
 
 target_include_directories(${EXECUTABLE} PRIVATE
   ${Python_INCLUDE_DIRS})

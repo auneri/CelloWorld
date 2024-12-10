@@ -17,10 +17,13 @@ set_target_properties(${EXECUTABLE} PROPERTIES
   CXX_STANDARD_REQUIRED ON
   CXX_EXTENSIONS OFF)
 
-target_compile_options(${EXECUTABLE} PRIVATE
-  "$<$<CXX_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
-  "$<$<CXX_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
-  "$<$<CXX_COMPILER_ID:MSVC>:/W4>")
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "GNU")
+  target_compile_options(${EXECUTABLE} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  target_compile_options(${EXECUTABLE} PRIVATE /W4)
+endif()
 
 target_link_libraries(${EXECUTABLE} PRIVATE Qt5::Widgets)
 

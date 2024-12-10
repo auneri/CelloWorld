@@ -20,10 +20,13 @@ set_target_properties(${LIBRARY} PROPERTIES
   C_STANDARD_REQUIRED ON
   C_EXTENSIONS OFF)
 
-target_compile_options(${LIBRARY} PRIVATE
-  "$<$<C_COMPILER_ID:Clang>:-Weverything;-Wfatal-errors>"
-  "$<$<C_COMPILER_ID:GNU>:-Wall;-Wextra;-Wfatal-errors>"
-  "$<$<C_COMPILER_ID:MSVC>:/W3>")
+if(CMAKE_C_COMPILER_ID MATCHES "Clang")
+  target_compile_options(${LIBRARY} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_C_COMPILER_ID MATCHES "GNU")
+  target_compile_options(${LIBRARY} PRIVATE -Wall -Wextra -Wpedantic -Wfatal-errors)
+elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
+  target_compile_options(${LIBRARY} PRIVATE /W4)
+endif()
 
 set_source_files_properties(library.i PROPERTIES
   SWIG_FLAGS "-builtin;-py3")
