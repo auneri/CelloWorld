@@ -31,9 +31,15 @@ void process_run(const std::string& command, const std::string& directory="") {
 #ifdef _WIN32
   if (!directory.empty()) _chdir(directory.data());
 #else
-  if (!directory.empty()) chdir(directory.data());
+  if (!directory.empty()) {
+    if (chdir(directory.data()) != 0) {
+      throw std::runtime_error("chdir failed!");
+    }
+  }
 #endif
-  std::system(command.data());
+  if (std::system(command.data()) != 0) {
+    throw std::runtime_error("std::system failed!");
+  }
 }
 
 
