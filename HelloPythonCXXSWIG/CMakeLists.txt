@@ -29,7 +29,7 @@ endif()
 
 set_source_files_properties(library.i PROPERTIES
   CPLUSPLUS ON
-  SWIG_FLAGS "-builtin;-py3")
+  SWIG_FLAGS "-builtin")
 swig_add_library(${MODULE}
   LANGUAGE python
   SOURCES library.i)
@@ -39,7 +39,7 @@ target_include_directories(${MODULE} PRIVATE
   ${Python_INCLUDE_DIRS})
 
 target_link_libraries(${MODULE} PRIVATE ${LIBRARY})
-if(APPLE)
+if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
   set_target_properties(${MODULE} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 else()
   target_link_libraries(${MODULE} PRIVATE ${Python_LIBRARIES})

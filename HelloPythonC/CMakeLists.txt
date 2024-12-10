@@ -4,7 +4,7 @@ project(HelloPythonC LANGUAGES C)
 
 set(Python_FIND_FRAMEWORK LAST)
 set(Python_FIND_VIRTUALENV ONLY)
-find_package(Python REQUIRED COMPONENTS Development Interpreter)
+find_package(Python 3.8 REQUIRED COMPONENTS Development Interpreter)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 

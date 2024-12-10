@@ -4,7 +4,7 @@ project(HelloPythonCSWIG LANGUAGES C)
 
 set(Python_FIND_FRAMEWORK LAST)
 set(Python_FIND_VIRTUALENV ONLY)
-find_package(Python REQUIRED COMPONENTS Development Interpreter)
+find_package(Python 3.8 REQUIRED COMPONENTS Development Interpreter)
 
 find_package(SWIG REQUIRED)
 include(${SWIG_USE_FILE})
@@ -28,7 +28,7 @@ elseif(CMAKE_C_COMPILER_ID MATCHES "MSVC")
 endif()
 
 set_source_files_properties(library.i PROPERTIES
-  SWIG_FLAGS "-builtin;-py3")
+  SWIG_FLAGS "-builtin")
 swig_add_library(${MODULE}
   LANGUAGE python
   SOURCES library.i)
@@ -38,7 +38,7 @@ target_include_directories(${MODULE} PRIVATE
   ${Python_INCLUDE_DIRS})
 
 target_link_libraries(${MODULE} PRIVATE ${LIBRARY})
-if(APPLE)
+if(CMAKE_CXX_COMPILER_ID MATCHES "AppleClang")
   set_target_properties(${MODULE} PROPERTIES LINK_FLAGS "-undefined dynamic_lookup")
 else()
   target_link_libraries(${MODULE} PRIVATE ${Python_LIBRARIES})
