@@ -32,26 +32,22 @@ add_custom_command(
   COMMAND "${CMAKE_COMMAND}" -E copy "${PROJECT_SOURCE_DIR}/library.h" "MATLAB/${LIBRARY}.h"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR})
 
-find_program(MATLAB_EXECUTABLE matlab)
-if(MATLAB_EXECUTABLE)
-  set(SCRIPT
-    "addpath('${PROJECT_BINARY_DIR}/MATLAB')"
-    "try; run('${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Tests.m')"
-    "catch err; fprintf(2, '%s\\n', getReport(err, 'extended')); exit(1)"
-    "end; exit(0)")
+find_package(Matlab REQUIRED COMPONENTS MAIN_PROGRAM)
+set(SCRIPT
+  "addpath('${PROJECT_BINARY_DIR}/MATLAB')"
+  "try; run('${PROJECT_BINARY_DIR}/MATLAB/${PROJECT_NAME}Tests.m')"
+  "catch err; fprintf(2, '%s\\n', getReport(err, 'extended')); exit(1)"
+  "end; exit(0)")
 
-  enable_testing()
-  if(UNIX)
-    add_test(
-      NAME ${PROJECT_NAME}Test1
-      COMMAND "${MATLAB_EXECUTABLE}" -nojvm -nodesktop -nosplash -r "${SCRIPT}")
-  elseif(WIN32)
-    add_test(
-      NAME ${PROJECT_NAME}Test1
-      COMMAND "${MATLAB_EXECUTABLE}" -nojvm -automation -wait -r "${SCRIPT}")
-  else()
-    message(FATAL_ERROR "Platform is not supported")
-  endif()
+enable_testing()
+if(UNIX)
+  add_test(
+    NAME ${PROJECT_NAME}Test1
+    COMMAND "${Matlab_MAIN_PROGRAM}" -nojvm -nodesktop -nosplash -r "${SCRIPT}")
+elseif(WIN32)
+  add_test(
+    NAME ${PROJECT_NAME}Test1
+    COMMAND "${Matlab_MAIN_PROGRAM}" -nojvm -automation -wait -r "${SCRIPT}")
 else()
-  message(WARNING "MATLAB_EXECUTABLE needs to be defined to run the tests")
+  message(FATAL_ERROR "Platform is not supported")
 endif()
