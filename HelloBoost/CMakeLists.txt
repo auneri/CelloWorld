@@ -4,7 +4,7 @@ project(HelloBoost LANGUAGES CXX)
 
 set(EXECUTABLE ${PROJECT_NAME}Executable)
 
-find_package(Boost QUIET REQUIRED COMPONENTS program_options)
+find_package(Boost REQUIRED COMPONENTS program_options CONFIG)
 
 add_executable(${EXECUTABLE} main.cxx)
 
