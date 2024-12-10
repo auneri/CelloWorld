@@ -24,11 +24,11 @@ target_link_libraries(${EXECUTABLE} PRIVATE ${Python_LIBRARIES})
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "$<TARGET_FILE:${EXECUTABLE}>")
 
 if(CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   get_filename_component(PYTHONHOME ${Python_EXECUTABLE} DIRECTORY)
-  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+  set_tests_properties(${PROJECT_NAME}Test1 PROPERTIES
     ENVIRONMENT "PYTHONHOME=${PYTHONHOME}")
 endif()

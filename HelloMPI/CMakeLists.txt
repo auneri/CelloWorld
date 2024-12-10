@@ -27,5 +27,5 @@ target_link_libraries(${EXECUTABLE} PRIVATE ${MPI_C_LIBRARIES})
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "${MPIEXEC}" --oversubscribe "${MPIEXEC_NUMPROC_FLAG}" 4 ${MPIEXEC_PREFLAGS} "$<TARGET_FILE:${EXECUTABLE}>" ${MPIEXEC_POSTFLAGS})

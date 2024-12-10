@@ -21,5 +21,5 @@ endif()
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "$<TARGET_FILE:${EXECUTABLE}>")

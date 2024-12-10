@@ -27,5 +27,5 @@ target_link_libraries(${EXECUTABLE} PRIVATE ${Boost_LIBRARIES})
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "$<TARGET_FILE:${EXECUTABLE}>")

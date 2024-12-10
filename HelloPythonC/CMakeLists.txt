@@ -29,14 +29,14 @@ configure_file(
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "$<TARGET_FILE:${EXECUTABLE}>" "${PROJECT_NAME}Tests" argc)
 
 if(CMAKE_C_COMPILER_ID STREQUAL "MSVC")
   get_filename_component(PYTHONHOME ${Python_EXECUTABLE} DIRECTORY)
-  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+  set_tests_properties(${PROJECT_NAME}Test1 PROPERTIES
     ENVIRONMENT "PYTHONHOME=${PYTHONHOME};PYTHONPATH=${PROJECT_BINARY_DIR}")
 else()
-  set_tests_properties(${PROJECT_NAME}Tests PROPERTIES
+  set_tests_properties(${PROJECT_NAME}Test1 PROPERTIES
     ENVIRONMENT "PYTHONPATH=${PROJECT_BINARY_DIR}")
 endif()

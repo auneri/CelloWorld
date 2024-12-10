@@ -60,6 +60,6 @@ add_custom_command(
 
 enable_testing()
 add_test(
-  NAME ${PROJECT_NAME}Tests
+  NAME ${PROJECT_NAME}Test1
   COMMAND "${Python_EXECUTABLE}" -m "${MODULE}Tests"
   WORKING_DIRECTORY ${PROJECT_BINARY_DIR}/Python)

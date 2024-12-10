@@ -43,11 +43,11 @@ if(MATLAB_EXECUTABLE)
   enable_testing()
   if(UNIX)
     add_test(
-      NAME ${PROJECT_NAME}Tests
+      NAME ${PROJECT_NAME}Test1
       COMMAND "${MATLAB_EXECUTABLE}" -nojvm -nodesktop -nosplash -r "${SCRIPT}")
   elseif(WIN32)
     add_test(
-      NAME ${PROJECT_NAME}Tests
+      NAME ${PROJECT_NAME}Test1
       COMMAND "${MATLAB_EXECUTABLE}" -nojvm -automation -wait -r "${SCRIPT}")
   else()
     message(FATAL_ERROR "Platform is not supported")
