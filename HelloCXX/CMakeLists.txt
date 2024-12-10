@@ -23,3 +23,11 @@ enable_testing()
 add_test(
   NAME ${PROJECT_NAME}Test1
   COMMAND "$<TARGET_FILE:${EXECUTABLE}>")
+if(CMAKE_GENERATOR STREQUAL "Unix Makefiles")
+  add_test(
+    NAME ${PROJECT_NAME}Test2
+    COMMAND make)
+  add_test(
+    NAME ${PROJECT_NAME}Test3
+    COMMAND make clean)
+endif()

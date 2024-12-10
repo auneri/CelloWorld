@@ -1,8 +1,8 @@
 APP = HelloCExecutable
 OBJ = main.o
 
-CC ?= gcc
-CFLAGS = -std=c11 -Weverything -Wfatal-errors
+CC ?= cc
+CFLAGS = -std=c11 -Wall -Wextra -Wpedantic -Wfatal-errors
 
 $(APP): $(OBJ)
 	@echo "Linking $(OBJ) to $(APP)"
