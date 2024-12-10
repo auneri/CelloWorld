@@ -21,7 +21,7 @@ jobs:
           libboost-all-dev
           mpi-default-bin
           mpi-default-dev
-          nvidia-cuda-dev
+          nvidia-cuda-toolkit
           python3-dev
           qt5-default
           swig
