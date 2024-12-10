@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.15)
 
 project(HelloQt LANGUAGES CXX)
 
-find_package(Qt6 COMPONENTS Core Widgets)
+find_package(Qt6 QUIET COMPONENTS Core Widgets)
 if(NOT Qt6_FOUND)
   find_package(Qt5 5.15 REQUIRED COMPONENTS Core Widgets)
 endif()
